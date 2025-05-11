@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Ex02
 {
     internal class SecretCode
     {
-        private readonly string r_Code = generateCode();
+        private readonly StringBuilder r_Code = generateCode();
         private const int k_CodeLength = 4;
 
-       /* public SecretCode()
-        {
-            r_Code = generateCode();
-        }*/
-
-
-        private static string generateCode()
+        private static StringBuilder generateCode()
         {
             List<char> letters = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
-            string code = "";
+            StringBuilder code = new StringBuilder(k_CodeLength);
 
-            Random rnd = new Random();
+            Random randomNumber = new Random();
             
             for(int i = 0; i < k_CodeLength; i++)
             {
-                int index = rnd.Next(letters.Count);
-                code += letters[index];
+                int index = randomNumber.Next(letters.Count);
+                code.Append(letters[index]);
                 letters.RemoveAt(index);
             }
 
@@ -38,7 +33,7 @@ namespace Ex02
 
             for(int i = 0; i < k_CodeLength; i++)
             {
-                int indexInCode = r_Code.IndexOf(i_Guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
+                int indexInCode = r_Code.ToString().IndexOf(i_Guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
                 
                 // Compare indexes
                 if(indexInCode == i)       // The code and the guess have the same letter in the same index
