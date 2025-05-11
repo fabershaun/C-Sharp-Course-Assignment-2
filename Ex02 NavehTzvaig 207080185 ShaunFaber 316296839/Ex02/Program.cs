@@ -6,7 +6,7 @@ namespace Ex02
     {
         public static void Main()
         {
-            GameManager.startGame();
+            GameManager.StartGame();
         }
     }
 }
