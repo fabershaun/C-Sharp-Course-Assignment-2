@@ -36,9 +36,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board.cs" />
+    <Compile Include="ConsoleUI.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="GuessResult.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="SecretCode.cs" />
+    <Compile Include="Code.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
