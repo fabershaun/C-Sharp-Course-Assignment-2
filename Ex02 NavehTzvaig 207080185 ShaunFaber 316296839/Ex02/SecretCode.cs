@@ -8,16 +8,16 @@ namespace Ex02
 {
     internal class SecretCode
     {
-        private readonly string m_Code;
+        private readonly string r_Code = generateCode();
         private const int k_CodeLength = 4;
 
-        public SecretCode()
+       /* public SecretCode()
         {
-            m_Code = GenerateCode();
-        }
+            r_Code = generateCode();
+        }*/
 
 
-        private static string GenerateCode()
+        private static string generateCode()
         {
             List<char> letters = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
             string code = "";
@@ -34,14 +34,14 @@ namespace Ex02
             return code;
         }
 
-        internal void CompareGuessToCode(string i_guess, out int o_CountV, out int o_CountX)
+        internal void CompareGuessToCode(string i_Guess, out int o_CountV, out int o_CountX)
         {
             o_CountV = 0;
             o_CountX = 0;
 
             for(int i = 0; i < k_CodeLength; i++)
             {
-                int indexInCode = m_Code.IndexOf(i_guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
+                int indexInCode = r_Code.IndexOf(i_Guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
                 
                 // Compare indexes
                 if(indexInCode == i)        // The code and the guess have the same letter in the same index
