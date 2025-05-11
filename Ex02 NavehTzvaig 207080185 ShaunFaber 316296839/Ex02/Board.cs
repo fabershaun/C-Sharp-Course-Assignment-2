@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ex02
 {
+
+
+}
     internal class Board
     {
+
     }
 }

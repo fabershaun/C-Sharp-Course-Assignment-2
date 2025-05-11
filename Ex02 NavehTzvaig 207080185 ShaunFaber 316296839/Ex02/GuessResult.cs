@@ -2,22 +2,10 @@
 
 namespace Ex02
 {
-    internal class GuessResult
+    internal static class GuessResult
     {
-        private string m_Guess;
-        private int m_NumOfV = 0;
-        private int m_NumOfX = 0;
+        internal static int NumOfV { get; set; } = 0;
 
-        public string Guess
-        {
-            get { return m_Guess; }
-            set { m_Guess = value; }
-        }
-
-        private void resultOfTheGuess() //Think avout use in game class
-        {
-            //Code.CompareGuessToCode(m_Guess, out m_NumOfV, out m_NumOfX);
-        }
-
+        internal static int NumOfX { get; set; } = 0;
     }
 }

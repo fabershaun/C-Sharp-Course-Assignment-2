@@ -19,7 +19,7 @@ namespace Ex02
             r_Code = new StringBuilder(i_Code);
         }
 
-        private static StringBuilder generateCode()
+        private StringBuilder generateCode()
         {
             List<char> letters = new List<char> { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
             StringBuilder code = new StringBuilder(k_CodeLength);
@@ -36,24 +36,23 @@ namespace Ex02
             return code;
         }
 
-        //internal void CompareGuessToCode(string i_Guess, out int o_CountV, out int o_CountX)
-        internal void CompareGuessToCode(Code i_OtherCode, out int o_CountV, out int o_CountX)
+        internal void CompareGuessToCode(Code i_OtherCode)
         {
-            o_CountV = 0;
-            o_CountX = 0;
+            GuessResult.NumOfV = 0;
+            GuessResult.NumOfX = 0;
 
             for(int i = 0; i < k_CodeLength; i++)
             {
-                int indexInCode = m_Code.ToString().IndexOf(i_OtherCode.ToString()[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
+                int indexInCode = r_Code.ToString().IndexOf(i_OtherCode.ToString()[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
                 
                 // Compare indexes
                 if(indexInCode == i)       // The code and the guess have the same letter in the same index
                 {
-                    o_CountV++;
+                    GuessResult.NumOfV++;
                 }
                 else if(indexInCode != -1) // The code and the guess have the same letter in a different index
                 {
-                    o_CountX++;
+                    GuessResult.NumOfV++;
                 }
             }
         }
