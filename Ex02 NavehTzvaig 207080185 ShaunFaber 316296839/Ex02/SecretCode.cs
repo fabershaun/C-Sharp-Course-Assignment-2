@@ -44,7 +44,7 @@ namespace Ex02
                 int indexInCode = m_Code.IndexOf(i_guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
                 
                 // Compare indexes
-                if(indexInCode == i)        // The code and the guess have the same letter in the same index
+                if(indexInCode == i)       // The code and the guess have the same letter in the same index
                 {
                     o_CountV++;
                 }
