@@ -4,10 +4,20 @@ using System.Text;
 
 namespace Ex02
 {
-    internal class SecretCode
+    internal class Code
     {
-        private readonly StringBuilder r_Code = generateCode();
+        private readonly StringBuilder r_Code;
         private const int k_CodeLength = 4;
+
+        public Code() // Constructor for the code that generates a random code
+        {
+            r_Code = generateCode();
+        }
+       
+        public Code(string i_Code) // Constructor for the code that receives a code from the user
+        {
+            r_Code = new StringBuilder(i_Code);
+        }
 
         private static StringBuilder generateCode()
         {
@@ -26,14 +36,15 @@ namespace Ex02
             return code;
         }
 
-        internal void CompareGuessToCode(string i_Guess, out int o_CountV, out int o_CountX)
+        //internal void CompareGuessToCode(string i_Guess, out int o_CountV, out int o_CountX)
+        internal void CompareGuessToCode(Code i_OtherCode, out int o_CountV, out int o_CountX)
         {
             o_CountV = 0;
             o_CountX = 0;
 
             for(int i = 0; i < k_CodeLength; i++)
             {
-                int indexInCode = r_Code.ToString().IndexOf(i_Guess[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
+                int indexInCode = m_Code.ToString().IndexOf(i_OtherCode.ToString()[i]); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
                 
                 // Compare indexes
                 if(indexInCode == i)       // The code and the guess have the same letter in the same index
