@@ -130,7 +130,7 @@ namespace Ex02
             }
 
             i_Pin.Clear();
-            i_Pin.Append(spaced.ToString());
+            i_Pin.Append(spaced);
         }
     }
 
