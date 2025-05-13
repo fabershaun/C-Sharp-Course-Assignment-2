@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Ex02
 {
@@ -19,12 +20,19 @@ namespace Ex02
             set { m_NumOfX = value; }
         }
 
-        public string GetResult()
+        public string GetResultString()
         {
-            string result = m_NumOfV.ToString();
-            result += NumOfX.ToString();
+            StringBuilder result = new StringBuilder();
 
-            return result;
+            for(int i = 0; i < m_NumOfV; i++)
+                result.Append("V");
+
+            for (int i = 0; i < m_NumOfX; i++)
+                result.Append("X");
+
+            Code.SpacingPin(result);
+
+            return result.ToString();
         }
     }
 }
