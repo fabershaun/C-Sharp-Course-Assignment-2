@@ -82,7 +82,7 @@ namespace Ex02
 
             foreach(char letter in i_GuessString)
             {
-                if(letter < 'A' || letter > 'Z')
+                if(!(sr_OptionsLetters.Contains(letter)) && letter != 'Q')
                 {
                     validInput = false;
                     break;
@@ -94,28 +94,17 @@ namespace Ex02
 
         internal static bool CheckIrrelevantInput(string i_GuessString)
         {
-            bool validInput = true;
+            return isLengthValid(i_GuessString) && !hasDuplicateLetters(i_GuessString);
+        }
 
-            foreach (char letter in i_GuessString)
-            {
-                if(!(sr_OptionsLetters.Contains(letter)) && letter != 'Q')
-                {
-                    validInput = false;
-                    break;
-                }
-            }
+        private static bool isLengthValid(string i_GuessString)
+        {
+            return i_GuessString.Length == k_CodeLength || i_GuessString == "Q";
+        }
 
-            if(i_GuessString.Length != k_CodeLength)
-            {
-                validInput = false;
-            }
-
-            if (new HashSet<char>(i_GuessString).Count != i_GuessString.Length)
-            {
-                validInput = false;
-            }
-
-            return validInput;
+        private static bool hasDuplicateLetters(string i_GuessString)
+        {
+            return new HashSet<char>(i_GuessString).Count != i_GuessString.Length;  
         }
 
         internal static void SpacingPin(StringBuilder i_Pin)
