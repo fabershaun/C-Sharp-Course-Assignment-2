@@ -7,10 +7,10 @@ namespace Ex02
 {
     internal class Code
     {
-        private static readonly char[] r_OptionsLetters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+        private static readonly char[] sr_OptionsLetters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+        private const int k_CodeLength = 4;
         private List<char> m_PinLetter;
-        private static readonly int sr_CodeLength = 4;
-        StringBuilder m_CodeLetters;
+        private StringBuilder m_CodeLetters;
 
         public Code() // Constructor for the code that generates a random code
         {
@@ -27,6 +27,11 @@ namespace Ex02
             get { return m_PinLetter; }
         }
 
+        internal static int CodeLength
+        {
+            get { return k_CodeLength; }
+        }
+
         internal StringBuilder CodeLetters
         {
             get { return m_CodeLetters; }
@@ -35,11 +40,11 @@ namespace Ex02
 
         private StringBuilder generateCode()
         {
-            StringBuilder code = new StringBuilder(sr_CodeLength);
-            m_PinLetter = new List<char>(r_OptionsLetters);
+            StringBuilder code = new StringBuilder(k_CodeLength);
+            m_PinLetter = new List<char>(sr_OptionsLetters);
             Random randomNumber = new Random();
 
-            for (int i = 0; i < sr_CodeLength; i++)
+            for (int i = 0; i < k_CodeLength; i++)
             {
                 int index = randomNumber.Next(m_PinLetter.Count);
                 code.Append(m_PinLetter[index]);
@@ -54,7 +59,7 @@ namespace Ex02
             io_GuessResult.NumOfV = 0;
             io_GuessResult.NumOfX = 0;
 
-            for (int i = 0; i < sr_CodeLength; i++)
+            for (int i = 0; i < k_CodeLength; i++)
             {
                 char guessChar = i_OtherCode.CodeLetters[i];
                 int indexInCode = CodeLetters.ToString().IndexOf(guessChar); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
@@ -93,11 +98,16 @@ namespace Ex02
 
             foreach (char letter in i_GuessString)
             {
-                if(!(r_OptionsLetters.Contains(letter)) && letter != 'Q')
+                if(!(sr_OptionsLetters.Contains(letter)) && letter != 'Q')
                 {
                     validInput = false;
                     break;
                 }
+            }
+
+            if(i_GuessString.Length != k_CodeLength)
+            {
+                validInput = false;
             }
 
             if (new HashSet<char>(i_GuessString).Count != i_GuessString.Length)
@@ -106,11 +116,6 @@ namespace Ex02
             }
 
             return validInput;
-        }
-        
-        internal static int CodeLength
-        {
-            get { return sr_CodeLength; }
         }
 
         internal static void SpacingPin(StringBuilder i_Pin)

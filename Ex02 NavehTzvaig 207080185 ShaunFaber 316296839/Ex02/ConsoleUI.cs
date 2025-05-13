@@ -48,11 +48,7 @@ namespace Ex02
 
         internal static void WinGame(int i_CurrentNumberOfTry)
         {
-            StringBuilder winMessage = new StringBuilder();
-
-            winMessage.Append("You guessed after ");
-            winMessage.Append(i_CurrentNumberOfTry);
-            winMessage.AppendLine(" steps!");
+            Console.WriteLine($"You guessed after {i_CurrentNumberOfTry} steps!");
         }
 
         internal static void LostGame()
