@@ -32,6 +32,7 @@ namespace Ex02
             m_GuessResult = new GuessResult();
             s_TotalNumberOfTries = getAndValidateNumberOfTries();
             m_Board = new Board(s_TotalNumberOfTries);  // Initialize board
+            ConsoleUI.PrintBoard(m_Board);
             s_CurrentNumberOfTry = 1;
             s_WonTheGame = false;
             s_AnotherGame = false;
@@ -71,16 +72,27 @@ namespace Ex02
         private static int getAndValidateNumberOfTries()
         {
             int numberOfTriesInt;
-            bool validInput = false;
+            bool validInput = true;
 
             do
             {
                 string inputNumberOfTriesString = ConsoleUI.GetMaxTriesFromUser();
-                validInput = int.TryParse(inputNumberOfTriesString, out numberOfTriesInt) && numberOfTriesInt <= k_MaxPossibleTries && numberOfTriesInt >= k_MinPossibleTries;
+                /*                validInput = int.TryParse(inputNumberOfTriesString, out numberOfTriesInt) && 
+                                             numberOfTriesInt <= k_MaxPossibleTries && numberOfTriesInt >= k_MinPossibleTries;*/
 
-                if (!validInput)
+                if(!(int.TryParse(inputNumberOfTriesString, out numberOfTriesInt)))
                 {
-                    Console.WriteLine("Invalid input. Please a number between 4 to 10.");
+                    validInput = false;
+                    ConsoleUI.PrintGenericMessage("Wrong syntax input. ");
+                }
+                else if(!(numberOfTriesInt <= k_MaxPossibleTries && numberOfTriesInt >= k_MinPossibleTries))
+                {
+                    validInput = false;
+                    ConsoleUI.PrintGenericMessage("Wrong logic input. ");
+                }
+                else
+                {
+                    validInput = true;
                 }
             }
             while (!validInput);
@@ -94,15 +106,10 @@ namespace Ex02
             bool validGuess = false;
             do
             {
-                newGuessFromUser = ConsoleUI.GetNewGuess().ToUpper();
+                newGuessFromUser = ConsoleUI.GetNewGuess();
 
-                validGuess = Code.CheckInputSyntax(newGuessFromUser) && 
-                             Code.CheckIrrelevantInput(newGuessFromUser);
+                validGuess = Code.CheckIrrelevantGuessInput(newGuessFromUser) && Code.CheckInputGuessSyntax(newGuessFromUser);
 
-                if (!validGuess)
-                {
-                    Console.WriteLine("Invalid input. Please enter 4 different letters from A to H.");
-                }
             } while (!validGuess);
 
             return newGuessFromUser;
@@ -162,7 +169,7 @@ namespace Ex02
                         s_AnotherGame = false;
                         break;
                     default:
-                        ConsoleUI.PrintGenericMessage("Wrong Input");
+                        ConsoleUI.PrintGenericMessage("Wrong Input. Press 'Y' to start a new game or 'N' to exit");
                         validInput = false;
                         break;
                 }

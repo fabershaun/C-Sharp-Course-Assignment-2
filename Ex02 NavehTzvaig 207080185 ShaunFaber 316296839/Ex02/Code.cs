@@ -76,25 +76,56 @@ namespace Ex02
             }
         }
 
-        internal static bool CheckInputSyntax(string i_GuessString)
+        internal static bool CheckInputGuessSyntax(string i_GuessString)
         {
-            bool validInput = true;
+            bool isValid = true;
 
-            foreach(char letter in i_GuessString)
+            if (string.IsNullOrEmpty(i_GuessString))
             {
-                if(!(sr_OptionsLetters.Contains(letter)) && letter != 'Q')
+                ConsoleUI.PrintGenericMessage("Input is empty. Please enter your guess or 'Q' to quit:");
+                isValid = false;
+            }
+            else
+            {
+                foreach (char letter in i_GuessString)
                 {
-                    validInput = false;
-                    break;
+                    if (!sr_OptionsLetters.Contains(letter) && letter != 'Q')
+                    {
+                        ConsoleUI.PrintGenericMessage("Wrong syntax input. Input must contain letters (A-H). Please try again:");
+                        isValid = false;
+                        break;
+                    }
                 }
             }
 
-            return validInput;
+            return isValid;
         }
 
-        internal static bool CheckIrrelevantInput(string i_GuessString)
+        internal static bool CheckIrrelevantGuessInput(string i_GuessString)
         {
-            return isLengthValid(i_GuessString) && !hasDuplicateLetters(i_GuessString);
+            bool isValid = true;
+
+            if (i_GuessString == "Q")
+            {
+                isValid = true;
+            }
+            else if (i_GuessString.Any(char.IsLower))
+            {
+                ConsoleUI.PrintGenericMessage("Input must be uppercase letters only (A-H). Please try again:");
+                isValid = false;
+            }
+            else if (!isLengthValid(i_GuessString))
+            {
+                ConsoleUI.PrintGenericMessage($"Input must be {k_CodeLength} letters long. Please try again:");
+                isValid = false;
+            }
+            else if (hasDuplicateLetters(i_GuessString))
+            {
+                ConsoleUI.PrintGenericMessage("Input must not contain duplicate letters. Please try again:");
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private static bool isLengthValid(string i_GuessString)
