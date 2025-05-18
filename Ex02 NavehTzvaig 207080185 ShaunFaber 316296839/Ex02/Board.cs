@@ -29,7 +29,7 @@ namespace Ex02
             r_Board[2] = new StringBuilder("| # # # # |         |");
             r_Board[3] = new StringBuilder("|=========|=========|");
 
-            for (int i = 4; i < r_MaxRow; i+=2)
+            for (int i = 4; i < r_MaxRow; i += 2)
             {
                 r_Board[i] = new StringBuilder("|         |         |");
                 r_Board[i + 1] = new StringBuilder("|=========|=========|");
@@ -46,7 +46,7 @@ namespace Ex02
             {
                 r_Board[rowNumber].Remove(2, guessString.Length);
                 r_Board[rowNumber].Insert(2, guessString);
-            
+
                 r_Board[rowNumber].Remove(12, resultString.Length);
                 r_Board[rowNumber].Insert(12, resultString);
             }

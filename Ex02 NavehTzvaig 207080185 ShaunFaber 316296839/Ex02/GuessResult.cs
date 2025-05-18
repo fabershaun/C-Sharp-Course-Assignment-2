@@ -23,11 +23,15 @@ namespace Ex02
         {
             StringBuilder result = new StringBuilder();
 
-            for(int i = 0; i < m_NumOfV; i++)
+            for (int i = 0; i < m_NumOfV; i++)
+            {
                 result.Append("V");
+            }
 
             for (int i = 0; i < m_NumOfX; i++)
+            {
                 result.Append("X");
+            }
 
             Code.SpacingPin(result);
 
