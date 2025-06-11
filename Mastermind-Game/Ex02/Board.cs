@@ -59,5 +59,4 @@ namespace Ex02
             r_Board[2].Insert(2, i_SecretCode);
         }
     }
-
 }

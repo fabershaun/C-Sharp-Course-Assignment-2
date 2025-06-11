@@ -6,8 +6,9 @@ namespace Ex02
     {
         public static void Main()
         {
-            GameManager game = new GameManager();
-            game.StartGame();
+            UIManager uiManager = new UIManager();
+
+            uiManager.Run();
         }
     }
 }

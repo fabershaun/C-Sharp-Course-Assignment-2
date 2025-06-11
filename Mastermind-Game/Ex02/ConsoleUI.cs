@@ -33,7 +33,7 @@ namespace Ex02
 
         internal static void ClearScreen()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            //Ex02.ConsoleUtils.Screen.Clear();
         }
 
         internal static string GetNewGuess()
