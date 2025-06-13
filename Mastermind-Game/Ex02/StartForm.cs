@@ -1,55 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ex02
 {
-    internal class StartForm : Form
+    public partial class StartForm : Form
     {
-        private int m_TotalNumberOfTries;
-
+        private int m_TotalNumberOfTries = GameLogic.MinPossibleTries;
         public StartForm()
         {
-            m_TotalNumberOfTries = GameLogic.MinPossibleTries;
-            initializeComponents();
+            InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterScreen;
+            buttonNumberOfChances.Text = $"Number of chances: {m_TotalNumberOfTries}";
         }
+
         public int TotalNumberOfTries => m_TotalNumberOfTries;
 
-        private void initializeComponents()
+        private void button1_Click(object sender, EventArgs e)
         {
-            this.Text = "Mastermind Game";
-            this.BackColor = Color.LavenderBlush;
-            this.MinimizeBox = false;
-            this.MaximizeBox = false;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.Size = new Size(300, 150);
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            Button buttonStart = new Button();
-            buttonStart.Text = "Start";
-            buttonStart.AutoSize = true;
-            buttonStart.Top = this.Bottom - (buttonStart.Height + 50);
-            buttonStart.Left = this.ClientSize.Width - (buttonStart.Width + 15);
-            buttonStart.Click += new EventHandler(buttonStart_Click);
-            this.Controls.Add(buttonStart);
-
-            Button buttonNumberOfChances = new Button();
-            buttonNumberOfChances.Text = $"Number of chances: {GameLogic.MinPossibleTries}";
-            buttonNumberOfChances.Top = 15;
-            buttonNumberOfChances.Left = 15;
-            buttonNumberOfChances.Width = this.ClientSize.Width - 30;
-            buttonNumberOfChances.Click += new EventHandler(buttonNumberOfChances_Click);
-            this.Controls.Add(buttonNumberOfChances);
-        }
-
-        private void buttonStart_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void buttonNumberOfChances_Click(object sender, EventArgs e)
-        {
-            //OnNumberOfTriesRequested();
             m_TotalNumberOfTries++;
 
             if (m_TotalNumberOfTries > GameLogic.MaxPossibleTries)
@@ -57,7 +32,12 @@ namespace Ex02
                 m_TotalNumberOfTries = GameLogic.MinPossibleTries;
             }
 
-            (sender as Button).Text = $"Number of chances: {m_TotalNumberOfTries}";
+            buttonNumberOfChances.Text = $"Number of chances: {m_TotalNumberOfTries}";
+        }
+
+        private void Start_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

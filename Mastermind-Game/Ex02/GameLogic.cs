@@ -7,8 +7,8 @@ namespace Ex02
     {
         private static readonly int sr_MaxPossibleTries = 10;
         private static readonly int sr_MinPossibleTries = 4;
-        private int m_TotalNumberOfTries;
-        private static int s_CurrentNumberOfTry = 1;
+        private int m_TotalNumberOfTries = sr_MinPossibleTries;
+        //private static int s_CurrentNumberOfTry = 1;
         private static bool s_WonTheGame = false;
         private Code m_SecretCode;
         private GuessResult m_GuessResult;
@@ -41,10 +41,10 @@ namespace Ex02
         {
             m_SecretCode = new Code();    
             m_GuessResult = new GuessResult();
-            m_TotalNumberOfTries = ConsoleUI.GetAndValidateNumberOfTries(sr_MinPossibleTries, sr_MaxPossibleTries);   // !!!!!!!
+            //m_TotalNumberOfTries = ConsoleUI.GetAndValidateNumberOfTries(sr_MinPossibleTries, sr_MaxPossibleTries);   // !!!!!!!
             m_Board = new Board(m_TotalNumberOfTries);  // Initialize board
-            ConsoleUI.PrintBoard(m_Board);   // !!! We can delete without add something else
-            s_CurrentNumberOfTry = 1;
+            //ConsoleUI.PrintBoard(m_Board);   // !!! We can delete without add something else
+            //s_CurrentNumberOfTry = 1;
             s_WonTheGame = false;
         }
 
@@ -72,7 +72,7 @@ namespace Ex02
             }
         }
 
-       private void endOfRound()
+/*       private void endOfRound()
         {
             if (s_WonTheGame)
             {
@@ -84,9 +84,9 @@ namespace Ex02
             }
 
             s_CurrentNumberOfTry++;
-        }
+        }*/
 
-        private void winGame()
+/*        private void winGame()
         {
             m_Board.RevealSecretCodeOnBoard(m_SecretCode.CodeLetters);
             ConsoleUI.PrintBoard(m_Board);      /// !! We can delete without add something else
@@ -98,6 +98,6 @@ namespace Ex02
             m_Board.RevealSecretCodeOnBoard(m_SecretCode.CodeLetters);
             ConsoleUI.PrintBoard(m_Board);    /// !! We can delete without add something else
             ConsoleUI.LostGame();           /// !!!!!           
-        }
+        }*/
     }
 }

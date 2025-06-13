@@ -36,7 +36,7 @@ namespace Ex02
             }
         }
 
-        internal void UpdateBoard(Code i_NewGuess, GuessResult i_GuessResult, int i_GuessNumber)
+/*        internal void UpdateBoard(Code i_NewGuess, GuessResult i_GuessResult, int i_GuessNumber)
         {
             string guessString = i_NewGuess.CodeLetters.ToString();
             string resultString = i_GuessResult.GetResultString();
@@ -57,6 +57,6 @@ namespace Ex02
             Code.SpacingPin(i_SecretCode);
             r_Board[2].Remove(2, i_SecretCode.Length);
             r_Board[2].Insert(2, i_SecretCode);
-        }
+        }*/
     }
 }

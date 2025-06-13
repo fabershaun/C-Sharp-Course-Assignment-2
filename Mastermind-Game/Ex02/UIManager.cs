@@ -3,18 +3,20 @@ namespace Ex02
 {
     internal class UIManager
     {
-        StartForm startForm = new StartForm();
-        GameForm gameForm = new GameForm();
-        GameLogic gameLogic = new GameLogic();
+        private StartForm m_StartForm = new StartForm();
+        private GameLogic m_GameLogic = new GameLogic();
+        private GameForm m_GameForm;
 
         public void Run()
         {
-            startForm.ShowDialog();
+            m_StartForm.ShowDialog();
 
-            gameLogic.SetNumberOfTries(startForm.TotalNumberOfTries);
-            gameLogic.StartGame(); // לאתחל את הקוד הסודי, איפוס ניסיונות וכו וכו
+            m_GameLogic.SetNumberOfTries(m_StartForm.TotalNumberOfTries); // Do it without this function
+            //gameLogic.StartGame(); // לאתחל את הקוד הסודי, איפוס ניסיונות וכו וכו
 
-            gameForm.ShowDialog();
+            m_GameForm = new GameForm(m_GameLogic.TotalNumberOfTries);
+            //m_GameForm = new GameForm1(m_GameLogic.TotalNumberOfTries, Code.CodeLength);
+            m_GameForm.ShowDialog();
         }
     }
 }

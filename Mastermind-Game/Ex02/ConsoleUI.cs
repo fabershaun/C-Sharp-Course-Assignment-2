@@ -162,7 +162,7 @@ namespace Ex02
             return numberOfTriesInt;
         }
 
-        internal static string GetAndValidateNewGuess(ref bool o_ExitGame)
+/*        internal static string GetAndValidateNewGuess(ref bool o_ExitGame)
         {
             string newGuessFromUser = string.Empty;
             bool validGuess = false;
@@ -191,7 +191,7 @@ namespace Ex02
             } while (!validGuess && !o_ExitGame);
 
             return newGuessFromUser;
-        }
+        }*/
 
         private static void printGuessErrors(Code.eGuessValidation i_Syntax, Code.eGuessValidation i_Logic)
         {

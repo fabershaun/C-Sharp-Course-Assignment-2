@@ -7,11 +7,12 @@ namespace Ex02
 {
     internal class Code
     {
-        private static readonly char[] sr_OptionsLetters = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+        private static readonly int sr_NumOfPossibleOptions = 8;
         private const int k_CodeLength = 4;
-        private List<char> m_PinLetter;
-        private StringBuilder m_CodeLetters;
+        private readonly List<int> r_CodeElements = new List<int>(sr_NumOfPossibleOptions);
+        //private StringBuilder m_SecretCode;
 
+        
         internal enum eGuessValidation
         {
             Ok,
@@ -23,9 +24,12 @@ namespace Ex02
             OutOfRangeLetter
         }
 
-        public Code() // Constructor for the code that generates a random code
+        public static int NumOfPossibleOptions => sr_NumOfPossibleOptions;
+
+
+/*        public Code() // Constructor for the code that generates a random code
         {
-            CodeLetters = generateCode();
+            generateCode();
         }
 
         public Code(string i_Code) // Constructor for the code that receives a code from the user
@@ -33,15 +37,16 @@ namespace Ex02
             CodeLetters = new StringBuilder(i_Code);
         }
 
+
         internal List<char> Letters
         {
             get
             {
                 return m_PinLetter;
             }
-        }
+        }*/
 
-        internal static int CodeLength
+internal static int CodeLength
         {
             get
             {
@@ -49,7 +54,7 @@ namespace Ex02
             }
         }
 
-        internal StringBuilder CodeLetters
+/*        internal StringBuilder CodeLetters
         {
             get
             {
@@ -59,30 +64,29 @@ namespace Ex02
             {
                 m_CodeLetters = value;
             }
-        }
+        }*/
 
-        private StringBuilder generateCode()
+        private void generateCode()
         {
-            StringBuilder code = new StringBuilder(k_CodeLength);
-            m_PinLetter = new List<char>(sr_OptionsLetters);
+            //StringBuilder code = new StringBuilder(k_CodeLength);
             Random randomNumber = new Random();
 
-            for(int i = 0; i < k_CodeLength; i++)
+           /* for (int i = 0; i < k_CodeLength; i++)
             {
-                int index = randomNumber.Next(m_PinLetter.Count);
-                code.Append(m_PinLetter[index]);
-                m_PinLetter.RemoveAt(index);
+                int index = randomNumber.Next(m_CodeElements.Count);
+                code.Append(m_CodeElements[index]);
+                m_CodeElements.RemoveAt(index);
             }
 
-            return code;
+            return code;*/
         }
 
-        internal void CompareGuessToCode(Code i_OtherCode, GuessResult io_GuessResult)
+/*        internal void CompareGuessToCode(Code i_OtherCode, GuessResult io_GuessResult)
         {
             io_GuessResult.NumOfV = 0;
             io_GuessResult.NumOfX = 0;
 
-            for(int i = 0; i < k_CodeLength; i++)
+            for (int i = 0; i < k_CodeLength; i++)
             {
                 char guessChar = i_OtherCode.CodeLetters[i];
                 int indexInCode =
@@ -90,30 +94,30 @@ namespace Ex02
                         .IndexOf(guessChar); // Initialize 'indexInCode' to have index of the 'i' letter of the guess
 
                 // Compare indexes
-                if(indexInCode == i) // The code and the guess have the same letter in the same index
+                if (indexInCode == i) // The code and the guess have the same letter in the same index
                 {
                     io_GuessResult.NumOfV++;
                 }
-                else if(indexInCode != -1) // The code and the guess have the same letter in a different index
+                else if (indexInCode != -1) // The code and the guess have the same letter in a different index
                 {
                     io_GuessResult.NumOfX++;
                 }
             }
-        }
+        }*/
 
         internal static eGuessValidation CheckInputGuessSyntax(string i_GuessString)
         {
             eGuessValidation result = eGuessValidation.Ok;
 
-            if(string.IsNullOrEmpty(i_GuessString))
+            if (string.IsNullOrEmpty(i_GuessString))
             {
                 result = eGuessValidation.EmptyInput;
             }
             else
             {
-                foreach(char letter in i_GuessString)
+                foreach (char letter in i_GuessString)
                 {
-                    if(!char.IsLetter(letter) && letter != ConsoleUI.QuitChar)
+                    if (!char.IsLetter(letter) && letter != ConsoleUI.QuitChar)
                     {
                         result = eGuessValidation.IllegalCharacters;
                         break;
@@ -124,29 +128,29 @@ namespace Ex02
             return result;
         }
 
-        internal static eGuessValidation CheckIrrelevantGuessInput(string i_GuessString)
+/*        internal static eGuessValidation CheckIrrelevantGuessInput(string i_GuessString)
         {
             eGuessValidation result = eGuessValidation.Ok;
 
-            if(i_GuessString != ConsoleUI.QuitChar.ToString())
+            if (i_GuessString != ConsoleUI.QuitChar.ToString())
             {
-                if(i_GuessString.Any(char.IsLower))
+                if (i_GuessString.Any(char.IsLower))
                 {
                     result = eGuessValidation.NotUppercase;
                 }
-                else if(!isLengthValid(i_GuessString))
+                else if (!isLengthValid(i_GuessString))
                 {
                     result = eGuessValidation.WrongLength;
                 }
-                else if(hasDuplicateLetters(i_GuessString))
+                else if (hasDuplicateLetters(i_GuessString))
                 {
                     result = eGuessValidation.DuplicateLetters;
                 }
                 else
                 {
-                    foreach(char letter in i_GuessString)
+                    foreach (char letter in i_GuessString)
                     {
-                        if(!sr_OptionsLetters.Contains(letter))
+                        if (!sr_OptionsLetters.Contains(letter))
                         {
                             result = eGuessValidation.OutOfRangeLetter;
                             break;
@@ -156,7 +160,7 @@ namespace Ex02
             }
 
             return result;
-        }
+        }*/
 
         private static bool isLengthValid(string i_GuessString)
         {
@@ -172,10 +176,10 @@ namespace Ex02
         {
             StringBuilder spaced = new StringBuilder();
 
-            for(int i = 0; i < i_Pin.Length; i++)
+            for (int i = 0; i < i_Pin.Length; i++)
             {
                 spaced.Append(i_Pin[i]);
-                if(i < i_Pin.Length - 1)
+                if (i < i_Pin.Length - 1)
                 {
                     spaced.Append(' ');
                 }
