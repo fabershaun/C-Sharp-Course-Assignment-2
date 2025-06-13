@@ -19,7 +19,7 @@ namespace Ex02
             set { m_NumOfX = value; }
         }
 
-        public string GetResultString()
+/*        public string GetResultString()
         {
             StringBuilder result = new StringBuilder();
 
@@ -36,6 +36,6 @@ namespace Ex02
             Code.SpacingPin(result);
 
             return result.ToString();
-        }
+        }*/
     }
 }

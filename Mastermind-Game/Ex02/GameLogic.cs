@@ -8,20 +8,13 @@ namespace Ex02
         private static readonly int sr_MaxPossibleTries = 10;
         private static readonly int sr_MinPossibleTries = 4;
         private int m_TotalNumberOfTries = sr_MinPossibleTries;
-        //private static int s_CurrentNumberOfTry = 1;
         private static bool s_WonTheGame = false;
         private Code m_SecretCode;
         private GuessResult m_GuessResult;
-        private Board m_Board;
-
-        public event EventHandler NumberOfTriesRequested;
-        public event EventHandler BoardUpdate;
-        public event EventHandler NewGuessRequested;
-        public event EventHandler SecretCodeRevealed;
-        public event EventHandler GameWon;
-
+        
 
         public static int MinPossibleTries => sr_MinPossibleTries;
+
         public static int MaxPossibleTries => sr_MaxPossibleTries;
 
         public int TotalNumberOfTries => m_TotalNumberOfTries;
@@ -34,19 +27,17 @@ namespace Ex02
         public void StartGame()
         {
             initializeGame();
-            //gameLoop(s_TotalNumberOfTries);
         }
 
         private void initializeGame()
         {
-            m_SecretCode = new Code();    
+            ColorPickForm colorPickForm = new ColorPickForm();
+            int size = colorPickForm.TotalColorsToChoose.Count;
+            m_SecretCode = new Code(size);    
             m_GuessResult = new GuessResult();
-            //m_TotalNumberOfTries = ConsoleUI.GetAndValidateNumberOfTries(sr_MinPossibleTries, sr_MaxPossibleTries);   // !!!!!!!
-            m_Board = new Board(m_TotalNumberOfTries);  // Initialize board
-            //ConsoleUI.PrintBoard(m_Board);   // !!! We can delete without add something else
-            //s_CurrentNumberOfTry = 1;
             s_WonTheGame = false;
         }
+
 
         /*private void gameLoop(int i_TotalNumberOfTries)
         {
@@ -63,6 +54,16 @@ namespace Ex02
             endOfRound();
             
         }*/
+
+        public bool IsGameWon()
+        {
+            return s_WonTheGame;
+        }
+
+        public Code GetSecretCode()
+        {
+            return m_SecretCode;
+        }
 
         private void updateIfWin(GuessResult i_GuessResult)
         {

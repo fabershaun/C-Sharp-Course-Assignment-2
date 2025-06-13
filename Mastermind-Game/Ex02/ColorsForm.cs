@@ -7,9 +7,8 @@ namespace Ex02
 {
     internal class ColorsForm : Form
     {
-        private readonly int r_NumberOfColors = Code.NumOfPossibleOptions;
+        private readonly int r_NumberOfColors = 8 /*Code.NumOfPossibleOptions*/;
         private readonly List<Color> r_Colors = new List<Color>();
-        private HashSet<int> r_ColorsChoices = new HashSet<int>();
 
         public ColorsForm()
         {

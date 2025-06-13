@@ -12,7 +12,7 @@ namespace Ex02
             m_StartForm.ShowDialog();
 
             m_GameLogic.SetNumberOfTries(m_StartForm.TotalNumberOfTries); // Do it without this function
-            //gameLogic.StartGame(); // לאתחל את הקוד הסודי, איפוס ניסיונות וכו וכו
+            m_GameLogic.StartGame();
 
             m_GameForm = new GameForm(m_GameLogic.TotalNumberOfTries);
             //m_GameForm = new GameForm1(m_GameLogic.TotalNumberOfTries, Code.CodeLength);
