@@ -13,9 +13,10 @@ namespace Ex02
     public partial class GuessRow : UserControl
     {
         private List<Button> m_GuessButtons;
-        private List<PictureBox> m_ResultGuess;
         private readonly bool[] r_IsColorChosen = new bool[4];
-        private readonly List<int> r_GuessButtonsIndexes = new List<int>();
+        public List<int> GuessButtonIndexes { get; } = new List<int>();
+        public List<PictureBox> ResultGuess { get; private set; }
+
         public event EventHandler GuessSubmitted;
 
         public GuessRow()
@@ -24,14 +25,11 @@ namespace Ex02
             initializeGuessButtonsList();
         }
 
-        public List<int> GuessButtonIndexes => r_GuessButtonsIndexes;
-
-        public List<PictureBox> ResultGuess => m_ResultGuess;
 
         private void initializeGuessButtonsList()
         {
             m_GuessButtons = new List<Button> { button1, button2, button3, button4 };
-            m_ResultGuess = new List<PictureBox> { pictureBox1, pictureBox2, pictureBox3, pictureBox4 };
+            ResultGuess = new List<PictureBox> { pictureBox1, pictureBox2, pictureBox3, pictureBox4 };
 
             foreach (Button button in m_GuessButtons)
             {
@@ -82,9 +80,12 @@ namespace Ex02
             {
                 if (colorForm.ShowDialog() == DialogResult.OK)
                 {
-                    clickedButton.BackColor = colorForm.SelectedColor;
-                    clickedButton.Tag = colorForm.Tag;
-                    updateIsColorChosen(clickedButton);
+                    if(clickedButton != null)
+                    {
+                        clickedButton.BackColor = colorForm.SelectedColor;
+                        clickedButton.Tag = colorForm.Tag;
+                        updateIsColorChosen(clickedButton);
+                    }
                 }
             }
         }
@@ -109,7 +110,7 @@ namespace Ex02
             {
                 if (button.Tag is int index)
                 {
-                    r_GuessButtonsIndexes.Add(index);
+                    GuessButtonIndexes.Add(index);
                 }
             }
 

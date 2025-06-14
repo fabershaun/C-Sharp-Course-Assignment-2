@@ -12,12 +12,15 @@ namespace Ex02
 {
     public partial class StartForm : Form
     {
-        private int m_TotalNumberOfTries = GameLogic.MinPossibleTries;
+        private int m_TotalNumberOfTries;
+
         public StartForm()
         {
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
+
+            m_TotalNumberOfTries = GameLogic.MinPossibleTries;
             buttonNumberOfChances.Text = $"Number of chances: {m_TotalNumberOfTries}";
         }
 

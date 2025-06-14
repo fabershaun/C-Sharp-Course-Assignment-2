@@ -12,35 +12,25 @@ namespace Ex02
 {
     public partial class GameForm : Form
     {
-        private readonly int r_CodeLength = 4;
+        private const int k_CodeLength = 4;
         private readonly int r_NumberOfTries;
-        private List<PictureBox> m_SecretCodeUnits;
+        private readonly List<Button> r_SecretCodeUnits;
         private readonly List<GuessRow> r_GuessRows = new List<GuessRow>();
-        private GameLogic m_GameLogic = new GameLogic();
-        private Color k_BullColor = Color.Black;
-        private Color k_CowsColor  = Color.Yellow;
+        private readonly GameLogic r_GameLogic = new GameLogic();
+        private readonly Color r_BullColor = Color.Black;
+        private readonly Color r_CowsColor  = Color.Yellow;
 
         public GameForm(int i_NumberOfTries)
         {
-            m_GameLogic.InitializeGame();
+            r_GameLogic.GenerateCode();
             r_NumberOfTries = i_NumberOfTries;
 
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            initializeSecretCodeBoxes();        // CHANGE NAME
+            r_SecretCodeUnits = new List<Button> { button1, button2, button3, button4 };
             createAllLinesOfGuesses();
             enableGuessingForTheFirstLine();
-        }
-
-        private void initializeSecretCodeBoxes()
-        {
-            m_SecretCodeUnits = new List<PictureBox> { pictureBox1, pictureBox2, pictureBox3, pictureBox4 };
-
-            foreach (PictureBox pb in m_SecretCodeUnits)
-            {
-                pb.BackColor = Color.Black;
-            }
         }
 
         private void enableGuessingForTheFirstLine()
@@ -65,19 +55,17 @@ namespace Ex02
 
         private void onGuessSubmitted(object sender, EventArgs e)
         {
-            bool isWonTheGame;
             GuessRow currentRow = sender as GuessRow;
             int currentIndex = r_GuessRows.IndexOf(currentRow);
-            int numOfBulls, numOfCows;
 
             r_GuessRows[currentIndex].EnableGuessing(false);
 
-            isWonTheGame = m_GameLogic.CompareGuessToCode(currentRow.GuessButtonIndexes, out numOfBulls, out numOfCows);
+            bool isWonTheGame = r_GameLogic.CompareGuessToCode(currentRow.GuessButtonIndexes, out int numOfBulls, out int numOfCows);
 
-            RevealGuessResult(currentRow, numOfBulls, numOfCows);
+            revealGuessResult(currentRow, numOfBulls, numOfCows);
             if(isWonTheGame || currentIndex + 1 == r_GuessRows.Count)
             {
-                RevealResultToTheUser();
+                revealResultToTheUser();
             }
             else if (currentIndex + 1 < r_GuessRows.Count)
             {
@@ -85,27 +73,27 @@ namespace Ex02
             }
         }
 
-        private void RevealResultToTheUser()
+        private void revealResultToTheUser()
         {
-            for(int i = 0; i < r_CodeLength; i++)
+            for(int i = 0; i < k_CodeLength; i++)
             {
-                int index = m_GameLogic.CodeElements[i]; // Assuming SecretCode is a List<Color>
-                m_SecretCodeUnits[i].BackColor = ColorPickForm.TotalColors[index];
+                int index = r_GameLogic.CodeElements[i];
+                r_SecretCodeUnits[i].BackColor = ColorPickForm.TotalColors[index];
             }
         }
 
-        private void RevealGuessResult(GuessRow currentRow, int i_numOfBulls, int i_numOfCows)
+        private void revealGuessResult(GuessRow currentRow, int i_numOfBulls, int i_numOfCows)
         {
             foreach (PictureBox resultGuessUnit in currentRow.ResultGuess)
             {
                 if(i_numOfBulls > 0)
                 {
-                    resultGuessUnit.BackColor = k_BullColor;
+                    resultGuessUnit.BackColor = r_BullColor;
                     i_numOfBulls--;
                 }
                 else if(i_numOfCows > 0)
                 {
-                    resultGuessUnit.BackColor = k_CowsColor;
+                    resultGuessUnit.BackColor = r_CowsColor;
                     i_numOfCows--;
                 }
                 else

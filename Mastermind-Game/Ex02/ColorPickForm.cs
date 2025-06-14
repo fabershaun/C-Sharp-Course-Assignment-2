@@ -12,14 +12,13 @@ namespace Ex02
 {
     public partial class ColorPickForm : Form
     {
+        private readonly List<Color> r_UsedColors;
+        private readonly List<Button> r_AvailableColorBoxes = new List<Button>();
         private static readonly List<Color> sr_TotalColors = new List<Color>
         {
             Color.Red, Color.Green, Color.Blue, Color.Yellow,
             Color.Orange, Color.Purple, Color.Brown, Color.White
         };
-
-        private readonly List<Color> r_UsedColors;
-        private readonly List<PictureBox> r_AvailableColorBoxes = new List<PictureBox>();
 
         public static List<Color> TotalColors => sr_TotalColors;
 
@@ -59,28 +58,32 @@ namespace Ex02
             };
 
             int colorIndex = 0;
+
             for (int row = 0; row < rows; row++)
             {
                 layout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
                 for (int col = 0; col < k_Columns; col++)
                 {
-                    if (colorIndex >= sr_TotalColors.Count)
+                    if(colorIndex >= sr_TotalColors.Count)
+                    {
                         break;
+                    }
 
                     Color color = sr_TotalColors[colorIndex];
-                    PictureBox pictureBox = new PictureBox
+                    Button button = new Button
                     {
                         BackColor = color,
                         Width = k_BoxSize,
                         Height = k_BoxSize,
                         Margin = new Padding(k_Spacing),
-                        BorderStyle = BorderStyle.FixedSingle,
                         Enabled = !r_UsedColors.Contains(color),
+                        TabIndex = colorIndex,
+                        TabStop = true
                     };
 
-                    pictureBox.Click += onColorBoxClick;
-                    r_AvailableColorBoxes.Add(pictureBox);
-                    layout.Controls.Add(pictureBox, col, row);
+                    button.Click += onColorBoxClick;
+                    r_AvailableColorBoxes.Add(button);
+                    layout.Controls.Add(button, col, row);
                     colorIndex++;
                 }
             }
@@ -90,95 +93,16 @@ namespace Ex02
 
         private void onColorBoxClick(object sender, EventArgs e)
         {
-            PictureBox clickedBox = sender as PictureBox;
+            Button clickedButton = sender as Button;
 
-            if (clickedBox.Enabled)
+            if (clickedButton.Enabled)
             {
-                SelectedColor = clickedBox.BackColor;
-                Tag = sr_TotalColors.IndexOf(clickedBox.BackColor);
+                SelectedColor = clickedButton.BackColor;
+                Tag = sr_TotalColors.IndexOf(clickedButton.BackColor);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
     }
-
-
-    /*      private readonly List<PictureBox> r_TotalColorsToChoose = new List<PictureBox>();
-            private readonly List<Color> r_UsedColors;
-
-
-
-            public ColorPickForm(List<Color> i_UsedColors)
-            {
-                InitializeComponent();
-                this.StartPosition = FormStartPosition.CenterScreen;
-                collectColorBoxes();
-
-                r_UsedColors = i_UsedColors;
-                disableUsedColors();
-                whenPictureBoxClicked();
-            }
-
-            public Color SelectedColor { get; private set; }
-
-            public List<PictureBox> TotalColorsToChoose
-            {
-                get
-                {
-                    return r_TotalColorsToChoose;
-                }
-            }
-            private void collectColorBoxes()
-            {
-                foreach (Control control in this.Controls)
-                {
-                    if (control is PictureBox pictureBox)
-                    {
-                        r_TotalColorsToChoose.Add(pictureBox);
-                    }
-                }
-            }
-
-
-            private void disableUsedColors()
-            {
-                foreach (Control control in this.Controls)
-                {
-                    if (control is PictureBox pictureBox)
-                    {
-                        if (r_UsedColors.Contains(pictureBox.BackColor))
-                        {
-                            pictureBox.Enabled = false;
-                        }
-                        else
-                        {
-                            pictureBox.Enabled = true;
-                        }
-                    }
-                }
-            }
-
-            private void whenPictureBoxClicked()
-            {
-                foreach (Control control in this.Controls)
-                {
-                    if (control is PictureBox pictureBox)
-                    {
-                        pictureBox.Click += onColorBoxClick;
-                    }
-                }
-            }
-
-            private void onColorBoxClick(object sender, EventArgs e)
-            {
-                PictureBox clickedBox = sender as PictureBox;
-
-                if (clickedBox.Enabled)
-                {
-                    SelectedColor = clickedBox.BackColor;
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-            }*/
 }
 
