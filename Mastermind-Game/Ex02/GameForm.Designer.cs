@@ -1,4 +1,6 @@
-﻿namespace Ex02
+﻿using System.Windows.Forms;
+
+namespace Ex02
 {
     partial class GameForm
     {
@@ -79,6 +81,9 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GameForm";
             this.Text = "Mastermind Game";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

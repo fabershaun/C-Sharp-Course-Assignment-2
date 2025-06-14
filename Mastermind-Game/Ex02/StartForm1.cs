@@ -60,19 +60,5 @@ namespace Ex02
 
             (sender as Button).Text = $"Number of chances: {m_TotalNumberOfTries}";
         }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // StartForm1
-            // 
-            this.ClientSize = new System.Drawing.Size(1440, 975);
-            this.Name = "StartForm1";
-            this.ResumeLayout(false);
-
-        }
-
-
     }
 }

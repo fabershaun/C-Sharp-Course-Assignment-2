@@ -42,7 +42,7 @@
             this.buttonNumberOfChances.Size = new System.Drawing.Size(463, 98);
             this.buttonNumberOfChances.TabIndex = 1;
             this.buttonNumberOfChances.UseVisualStyleBackColor = true;
-            this.buttonNumberOfChances.Click += new System.EventHandler(this.button1_Click);
+            this.buttonNumberOfChances.Click += new System.EventHandler(this.buttonNumberOfChances_Click);
             // 
             // Start
             // 

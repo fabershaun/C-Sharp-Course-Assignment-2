@@ -5,73 +5,106 @@ namespace Ex02
 {
     internal class GameLogic
     {
-        private static readonly int sr_MaxPossibleTries = 10;
-        private static readonly int sr_MinPossibleTries = 4;
-        private int m_TotalNumberOfTries = sr_MinPossibleTries;
-        private static bool s_WonTheGame = false;
-        private Code m_SecretCode;
-        private GuessResult m_GuessResult;
-        
+        private const int k_CodeLength = 4;
+        private const int k_RangeOfOptions = 8;
+        private const int k_MinPossibleTries = 4;
+        private const int k_MaxPossibleTries = 10;
+        //private int m_TotalNumberOfTries = k_MinPossibleTries;
+        //private static bool s_WonTheGame = false;   // ??
+        //private Code m_SecretCode;
+        //private GuessResult m_GuessResult;  //??
+        private readonly List<int> r_CodeElements = new List<int>(k_CodeLength);
 
-        public static int MinPossibleTries => sr_MinPossibleTries;
+        public static int CodeLength => k_CodeLength;
 
-        public static int MaxPossibleTries => sr_MaxPossibleTries;
+        public List<int> CodeElements => r_CodeElements;
 
-        public int TotalNumberOfTries => m_TotalNumberOfTries;
+        public static int RangeOfOptions => k_RangeOfOptions;
+
+        public static int MinPossibleTries => k_MinPossibleTries;
+
+        public static int MaxPossibleTries => k_MaxPossibleTries;
+
+/*        public int TotalNumberOfTries => m_TotalNumberOfTries;
 
         public void SetNumberOfTries(int i_Tries)
         {
             m_TotalNumberOfTries = i_Tries;
         }
+        */
 
-        public void StartGame()
+/*        public void StartGame()
         {
+            generateCode();
             initializeGame();
-        }
-
-        private void initializeGame()
-        {
-            ColorPickForm colorPickForm = new ColorPickForm();
-            int size = colorPickForm.TotalColorsToChoose.Count;
-            m_SecretCode = new Code(size);    
-            m_GuessResult = new GuessResult();
-            s_WonTheGame = false;
-        }
-
-
-        /*private void gameLoop(int i_TotalNumberOfTries)
-        {
-
-            string newGuessString = ConsoleUI.GetAndValidateNewGuess(ref s_ExitGame);  /// !! We can delete without add something else
-            Code newGuess = new Code(newGuessString);
-
-
-            m_SecretCode.CompareGuessToCode(newGuess, m_GuessResult);
-            Code.SpacingPin(newGuess.CodeLetters);
-            m_Board.UpdateBoard(newGuess, m_GuessResult, s_CurrentNumberOfTry);
-            ConsoleUI.PrintBoard(m_Board);      /// !! We can delete without add something else
-            updateIfWin(m_GuessResult);
-            endOfRound();
-            
         }*/
 
-        public bool IsGameWon()
+        public void InitializeGame()
         {
-            return s_WonTheGame;
+            generateCode();
+            //m_GuessResult = new GuessResult();
         }
 
-        public Code GetSecretCode()
+        private void generateCode()
         {
-            return m_SecretCode;
-        }
+            Random randomNumber = new Random();
+            HashSet<int> usedNumbers = new HashSet<int>();
+            int i = 0;
 
-        private void updateIfWin(GuessResult i_GuessResult)
-        {
-            if (i_GuessResult.NumOfV == Code.CodeLength)
+            while (i < k_CodeLength)
             {
-                s_WonTheGame = true;
+                int index = randomNumber.Next(k_RangeOfOptions);
+
+                if (!usedNumbers.Add(index)) // Ensure no duplicate numbers in the code
+                {
+                    continue;
+                }
+
+                r_CodeElements.Add(index);
+                i++;
             }
         }
+
+        internal bool CompareGuessToCode(List<int> i_OtherCode, out int o_NumOfBulls, out int o_NumOfCows)
+        {
+            o_NumOfBulls = 0;
+            o_NumOfCows = 0;
+
+            for (int i = 0; i < k_CodeLength; i++)
+            {
+                int guessElement = i_OtherCode[i];
+
+                if (guessElement == r_CodeElements[i])
+                {
+                    o_NumOfBulls++;
+                }
+                else if (r_CodeElements.Contains(guessElement))
+                {
+                    o_NumOfCows++;
+                }
+            }
+
+            return o_NumOfBulls == CodeLength;
+        }
+
+
+
+            /*private void gameLoop(int i_TotalNumberOfTries)
+            {
+
+                string newGuessString = ConsoleUI.GetAndValidateNewGuess(ref s_ExitGame);  /// !! We can delete without add something else
+                Code newGuess = new Code(newGuessString);
+
+
+                m_SecretCode.CompareGuessToCode(newGuess, m_GuessResult);
+                Code.SpacingPin(newGuess.CodeLetters);
+                m_Board.UpdateBoard(newGuess, m_GuessResult, s_CurrentNumberOfTry);
+                ConsoleUI.PrintBoard(m_Board);      /// !! We can delete without add something else
+                updateIfWin(m_GuessResult);
+                endOfRound();
+
+            }*/
+
 
 /*       private void endOfRound()
         {

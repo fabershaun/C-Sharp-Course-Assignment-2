@@ -4,18 +4,18 @@ namespace Ex02
     internal class UIManager
     {
         private StartForm m_StartForm = new StartForm();
-        private GameLogic m_GameLogic = new GameLogic();
+
         private GameForm m_GameForm;
 
         public void Run()
         {
             m_StartForm.ShowDialog();
 
-            m_GameLogic.SetNumberOfTries(m_StartForm.TotalNumberOfTries); // Do it without this function
-            m_GameLogic.StartGame();
+            //int numberOfTry = 4; //get from m_StartForm
+            //m_GameLogic.SetNumberOfTries(m_StartForm.TotalNumberOfTries); // Do it without this function
+            //m_GameLogic.InitializeGame();
 
-            m_GameForm = new GameForm(m_GameLogic.TotalNumberOfTries);
-            //m_GameForm = new GameForm1(m_GameLogic.TotalNumberOfTries, Code.CodeLength);
+            m_GameForm = new GameForm(m_StartForm.TotalNumberOfTries);
             m_GameForm.ShowDialog();
         }
     }

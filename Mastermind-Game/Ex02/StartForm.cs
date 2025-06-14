@@ -23,7 +23,7 @@ namespace Ex02
 
         public int TotalNumberOfTries => m_TotalNumberOfTries;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonNumberOfChances_Click(object sender, EventArgs e)
         {
             m_TotalNumberOfTries++;
 
