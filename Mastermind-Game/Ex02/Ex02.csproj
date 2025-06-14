@@ -39,34 +39,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
     <Compile Include="ColorPickForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConsoleUI.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GameLogic.cs" />
-    <Compile Include="GuessResult.cs" />
     <Compile Include="GuessRow.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GuessRow.Designer.cs">
       <DependentUpon>GuessRow.cs</DependentUpon>
     </Compile>
-    <Compile Include="GuessRow1.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Code.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,9 +66,6 @@
     </Compile>
     <Compile Include="StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StartForm1.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIManager.cs" />
   </ItemGroup>
@@ -106,9 +92,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StartForm1.resx">
-      <DependentUpon>StartForm1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
