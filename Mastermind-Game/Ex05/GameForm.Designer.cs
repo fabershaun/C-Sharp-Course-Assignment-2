@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     partial class GameForm
     {
@@ -88,7 +88,6 @@ namespace Ex02
             this.Controls.Add(this.button4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "GameForm";
             this.Text = "Mastermind Game";
             this.ResumeLayout(false);

@@ -1,4 +1,6 @@
-﻿namespace Ex02
+﻿using System.Windows.Forms;
+
+namespace Ex05
 {
     partial class StartForm
     {
@@ -65,8 +67,9 @@
             this.Controls.Add(this.buttonNumberOfChances);
             this.Name = "StartForm";
             this.Text = "Mastermind Game";
+            this.ShowInTaskbar = false;
             this.ResumeLayout(false);
-
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     partial class GuessRow
     {

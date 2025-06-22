@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     public partial class GuessRow : UserControl
     {
@@ -24,8 +19,7 @@ namespace Ex02
             InitializeComponent();
             initializeGuessButtonsList();
         }
-
-
+        
         private void initializeGuessButtonsList()
         {
             m_GuessButtons = new List<Button> { button1, button2, button3, button4 };
@@ -76,7 +70,7 @@ namespace Ex02
                 }
             }
 
-            using (ColorPickForm colorForm = new ColorPickForm(usedColors)) //TODO
+            using (ColorPickForm colorForm = new ColorPickForm(usedColors))
             {
                 if (colorForm.ShowDialog() == DialogResult.OK)
                 {
@@ -90,9 +84,9 @@ namespace Ex02
             }
         }
 
-        private void updateIsColorChosen(Button clickedButton)
+        private void updateIsColorChosen(Button i_ClickedButton)
         {
-            int indexOfGuessButton = m_GuessButtons.IndexOf(clickedButton);
+            int indexOfGuessButton = m_GuessButtons.IndexOf(i_ClickedButton);
 
             if (indexOfGuessButton >= 0)
             {
@@ -100,8 +94,7 @@ namespace Ex02
                 updateSubmitButtonState();
             }
         }
-
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             (sender as Button).Enabled = false;   // Disable the submit button after submission

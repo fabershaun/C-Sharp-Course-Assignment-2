@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B617353C-1072-41FD-8D24-5424EA089896}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Ex02</RootNamespace>
-    <AssemblyName>Ex02</AssemblyName>
+    <RootNamespace>Ex05</RootNamespace>
+    <AssemblyName>Ex05</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -1,5 +1,4 @@
-﻿
-namespace Ex02
+﻿namespace Ex05
 {
     internal class UIManager
     {
@@ -10,7 +9,6 @@ namespace Ex02
         public void Run()
         {
             r_StartForm.ShowDialog();
-
             m_GameForm = new GameForm(r_StartForm.TotalNumberOfTries);
             m_GameForm.ShowDialog();
         }

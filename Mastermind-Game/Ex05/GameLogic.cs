@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ex02
+namespace Ex05
 {
     internal class GameLogic
     {

@@ -8,34 +8,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     public partial class StartForm : Form
     {
-        private int m_TotalNumberOfTries;
-
         public StartForm()
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterScreen;
+            TotalNumberOfTries = GameLogic.MinPossibleTries;
 
-            m_TotalNumberOfTries = GameLogic.MinPossibleTries;
-            buttonNumberOfChances.Text = $"Number of chances: {m_TotalNumberOfTries}";
+            buttonNumberOfChances.Text = $"Number of chances: {TotalNumberOfTries}";
         }
 
-        public int TotalNumberOfTries => m_TotalNumberOfTries;
+        public int TotalNumberOfTries { get; private set; }
 
         private void buttonNumberOfChances_Click(object sender, EventArgs e)
         {
-            m_TotalNumberOfTries++;
+            TotalNumberOfTries++;
 
-            if (m_TotalNumberOfTries > GameLogic.MaxPossibleTries)
+            if (TotalNumberOfTries > GameLogic.MaxPossibleTries)
             {
-                m_TotalNumberOfTries = GameLogic.MinPossibleTries;
+                TotalNumberOfTries = GameLogic.MinPossibleTries;
             }
 
-            buttonNumberOfChances.Text = $"Number of chances: {m_TotalNumberOfTries}";
+            buttonNumberOfChances.Text = $"Number of chances: {TotalNumberOfTries}";
         }
 
         private void Start_Click(object sender, EventArgs e)

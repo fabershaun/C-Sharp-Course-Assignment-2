@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ex02
+namespace Ex05
 {
     public partial class GameForm : Form
     {
@@ -63,6 +58,7 @@ namespace Ex02
             bool isWonTheGame = r_GameLogic.CompareGuessToCode(currentRow.GuessButtonIndexes, out int numOfBulls, out int numOfCows);
 
             revealGuessResult(currentRow, numOfBulls, numOfCows);
+
             if(isWonTheGame || currentIndex + 1 == r_GuessRows.Count)
             {
                 revealResultToTheUser();
@@ -82,19 +78,19 @@ namespace Ex02
             }
         }
 
-        private void revealGuessResult(GuessRow currentRow, int i_numOfBulls, int i_numOfCows)
+        private void revealGuessResult(GuessRow i_CurrentRow, int i_NumOfBulls, int i_NumOfCows)
         {
-            foreach (PictureBox resultGuessUnit in currentRow.ResultGuess)
+            foreach (PictureBox resultGuessUnit in i_CurrentRow.ResultGuess)
             {
-                if(i_numOfBulls > 0)
+                if(i_NumOfBulls > 0)
                 {
                     resultGuessUnit.BackColor = r_BullColor;
-                    i_numOfBulls--;
+                    i_NumOfBulls--;
                 }
-                else if(i_numOfCows > 0)
+                else if(i_NumOfCows > 0)
                 {
                     resultGuessUnit.BackColor = r_CowsColor;
-                    i_numOfCows--;
+                    i_NumOfCows--;
                 }
                 else
                 {
